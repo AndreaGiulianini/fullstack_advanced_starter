@@ -1,0 +1,47 @@
+volumes:
+  postgres_volume:
+  api_node_modules_volume:
+  app_node_modules_volume:
+  app_sveltekit_volume:
+
+services:
+  app:
+    build:
+      context: ./app
+    image: app
+    container_name: app
+    environment:
+      TZ: Europe/Rome
+    volumes:
+      - ./app:/home/node/app
+      - app_node_modules_volume:/home/node/app/node_modules
+      - app_sveltekit_volume:/home/node/app/.svelte-kit
+    ports:
+      - 5173:5173
+    restart: always
+
+  api:
+    build:
+      context: ./api
+    image: api
+    container_name: api
+    environment:
+      TZ: Europe/Rome
+      ENVIRONMENT: development
+    volumes:
+      - ./api:/home/node/api
+      - api_node_modules_volume:/home/node/api/node_modules
+    ports:
+      - 3000:3000
+    restart: always
+
+  postgres:
+    image: postgres:14.4
+    container_name: postgres
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=demoPwd
+    ports:
+      - '7777:5432'
+    volumes: 
+      - postgres_volume:/var/lib/postgresql/data
