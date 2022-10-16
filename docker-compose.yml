@@ -4,6 +4,7 @@ volumes:
   app_node_modules_volume:
   app_sveltekit_volume:
 
+
 services:
   app:
     build:
@@ -43,5 +44,5 @@ services:
       - POSTGRES_PASSWORD=demoPwd
     ports:
       - '7777:5432'
-    volumes: 
+    volumes:
       - postgres_volume:/var/lib/postgresql/data
