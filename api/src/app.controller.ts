@@ -11,7 +11,7 @@ import { UserService } from './user.service';
 import { PostService } from './post.service';
 import { User as UserModel, Post as PostModel } from '@prisma/client';
 
-@Controller()
+@Controller('api')
 export class AppController {
   constructor(
     private readonly userService: UserService,
