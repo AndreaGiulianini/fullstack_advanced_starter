@@ -1,8 +1,8 @@
-FROM node:20
+FROM node:21
 
 WORKDIR /home/node
 COPY package.json ./
-RUN npm install --no-optional && npm cache clean --force
+RUN npm i && npm cache clean --force
 ENV PATH /home/node/node_modules/.bin:$PATH
 WORKDIR /home/node/app
 COPY ./ ./

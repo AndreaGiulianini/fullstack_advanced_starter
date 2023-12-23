@@ -15,7 +15,6 @@ export const load: PageServerLoad = async () => {
 	});
 
 	const users: User[] = await response.json();
-
 	return {
 		users: users
 	};
